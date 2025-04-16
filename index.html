@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" 
+    integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" 
+    crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <title>Home</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="hero-header">
+        <div class="wrapper">
+            <header>
+                <div class="logo">Vikram</div>
+                <div class="togglebtn">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <nav>
+                    <ul class="navlinks">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="skills.html">Skills</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="contacts.html">Contacts</a></li>
+                    </ul>
+                </nav>
+            </header>
+            <section class="home">
+                <div class="home-img">
+                    <img src="image.jpg" alt="Description">
+                </div>
+                <div class="home-content">
+                    <h1>Hi, Im <span>Vikram!</span></h1>
+                    <div class="typing-text">Im a <span></span></div>
+                    <p>I'm currently in grade 9 and will soon continue to senior high school. During my three years as a student at Peachblossom Junior High School, I have several skills taught by my teachers. When I was in grade 7 I had Visual Art skills, when I was in grade 8 I was an expert at playing the guitar and I am also an expert in creating design and technology works such as making digital printing designs, coding, and making web application designs. I am very lucky to be a student at Peachblossom Junior High School.</p>
+                    <a href="skills.html" class="skills-btn">My Skills</a>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <div class="close-btn">
+                <i class="fas fa-times"></i>
+            </div>
+        </div>
+        <div class="sidebar-nav">
+            <ul>
+                <li><a href="index.html"><i class="fas fa-home"></i>Home</a></li>
+                <li><a href="skills.html"><i class="fas fa-code"></i> Skills</a></li>
+                <li><a href="gallery.html"><i class="fas fa-images"></i> Gallery</a></li>
+                <li><a href="contacts.html"><i class="fas fa-envelope"></i> Contacts</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div>
+        <footer class="footer">
+            <div class="social-icons">
+                <a href="https://www.youtube.com/channel/UC4LDd9zy7q7uMv4xzBLIEPA"><i class="fa-brands fa-youtube"></i></a>
+                <a href="https://www.instagram.com/v1kkiiiz_/"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://github.com/vikiiiz"><i class="fa-brands fa-github"></i></a>
+            </div>
+            <p class="copyright">© 2024 Vikram. All rights reserved.</p>
+        </footer>
+    </div>
+    <script>
+        const toggleBtn = document.querySelector('.togglebtn');
+        const sidebar = document.querySelector('.sidebar');
+        const closeBtn = document.querySelector('.close-btn');
+        
+        toggleBtn.addEventListener('click', () => {
+            sidebar.classList.add('active');
+        });
+        
+        closeBtn.addEventListener('click', () => {
+            sidebar.classList.remove('active');
+        });
+
+        // Close sidebar when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!sidebar.contains(e.target) && !toggleBtn.contains(e.target)) {
+                sidebar.classList.remove('active');
+            }
+        });
+
+        const texts = ['Student', 'Developer', 'Designer', 'Gamer', 'Programmer'];
+        let count = 0;
+        let index = 0;
+        let currentText = '';
+        let letter = '';
+        let isDeleting = false;
+        let typingDelay = 200;
+        let erasingDelay = 100;
+        let newTextDelay = 2000;
+
+        function type() {
+            currentText = texts[count];
+            
+            if(isDeleting) {
+                letter = currentText.substring(0, --index);
+            } else {
+                letter = currentText.substring(0, ++index);
+            }
+
+            document.querySelector('.typing-text span').textContent = letter;
+
+            let typeSpeed = isDeleting ? erasingDelay : typingDelay;
+
+            if (!isDeleting && index === currentText.length) {
+                typeSpeed = newTextDelay;
+                isDeleting = true;
+            } else if (isDeleting && index === 0) {
+                isDeleting = false;
+                count++;
+                if (count === texts.length) count = 0;
+            }
+
+            setTimeout(type, typeSpeed);
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            type();
+        });
+    </script>
+</body>
+</html>
